@@ -1,0 +1,9 @@
+vec alldiv(ll n){vec ret;
+    for(ll i=1 ; i*i<=n ; ++i)
+    {if(n%i == 0)
+    {ret.push_back(i);
+    if(i!=1 && i*i!=n){
+    ret.push_back(n/i);}}}
+    return ret;}
+int main(){vec r = alldiv(10);
+    for(auto i : r){cout<<i<<" ";}cout<<endl;}
