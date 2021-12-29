@@ -1,3 +1,4 @@
+//#define int llをつける
 using namespace std::chrono;
 typedef long long ll;
 typedef unsigned long long ull;
