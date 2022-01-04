@@ -1,0 +1,41 @@
+ll modpow(ll a,ll n,ll mod) {
+   ll res = 1;
+    while (n > 0) {
+        if (n & 1) res = res * a % mod;
+        a = a * a % mod;n >>= 1;}
+    return res;}
+ll modinv(ll a,ll m) {
+ ll b = m, u = 1, v = 0;
+    while (b) {
+        ll t = a / b;
+        a -= t * b; swap(a, b);
+        u -= t * v; swap(u, v);}
+    u %= m;
+    if (u < 0) u += m;
+    return u;}
+ll modlog(ll a,ll b, ll m) {
+    a %= m,b %= m;
+    ll lo = -1, hi = m;
+    while (hi - lo > 1) {
+        long long mid = (lo + hi) / 2;
+        if (mid * mid >= m) hi = mid;
+        else lo = mid;}
+   ll sqrtM = hi;
+map<long long, long long> apow;
+    long long amari = a;
+    for (long long r = 1; r < sqrtM; ++r) {
+        if (!apow.count(amari)) apow[amari] = r;
+        (amari *= a) %= m;}
+  ll A = modpow(modinv(a, m), sqrtM, m);
+    amari = b;
+    for (ll q = 0; q < sqrtM; ++q) {
+        if (amari == 1 && q > 0) return q * sqrtM;
+        else if (apow.count(amari)) return q * sqrtM + apow[amari];
+        (amari *= A) %= m;}
+    return -1;}
+
+const int MOD = 1000000007;
+int main() {
+    cout<<modlog(2,8,MOD)<<endl;
+}
+
