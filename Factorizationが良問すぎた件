@@ -1,0 +1,45 @@
+//二分累乗法
+ll mod=1000000007;
+ll modpow(ll a,ll p){
+    if(p==0)return 1;
+    if(p%2==0){
+        ll halfp=p/2;
+        ll half=modpow(a,halfp);
+        return half*half%mod;}
+    else{return a*modpow(a,p-1)%mod;}
+}
+//二項係数の計算
+ll calccomb(ll a,ll b){
+    if(b>a-b){return calccomb(a,a-b);}
+    ll ansMul=1;
+    ll ansDiv=1;
+    rep(i,b){
+        ansMul*=(a-i);
+        ansDiv*=(i+1);
+        ansMul%=mod;
+        ansDiv%=mod;
+    }
+    //逆元をfermatでやる.
+    ll ans=ansMul*modpow(ansDiv,mod-2)%mod;
+    return ans;
+}
+int main(){
+    ll N,M;cin>>N>>M;
+    ll mnokori=M;
+    ll ans=1;
+    for(ll i=2;i*i<=mnokori;i++){
+        if(mnokori%i==0){
+            ll cnt=0;
+            while(mnokori%i==0){
+                cnt++;
+                mnokori/=i;
+            }
+            ans*=calccomb(N+cnt-1,N-1);
+            ans%=mod;
+        }
+    }
+    if(mnokori!=1){ans*=calccomb(N,N-1);
+        ans%=mod;}
+    cout<<ans<<endl;
+}
+
