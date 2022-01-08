@@ -1,0 +1,56 @@
+const ll MOD = 1000000007;
+
+
+ll GCD(ll a, ll b) {
+    if (b == 0) return a;
+    else return GCD(b, a % b);}
+ll PreGarner(vector<ll> &b, vector<ll> &m,ll MOD) {
+    ll res = 1;
+    for (ll i = 0; i < (ll)b.size(); ++i) {
+        rep(j,i) {
+            ll g = GCD(m[i], m[j]);
+            if ((b[i] - b[j]) % g != 0) return -1;
+            m[i] /= g; m[j] /= g;
+            ll gi = GCD(m[i], g);
+            ll gj = g/gi;
+            do {g = GCD(gi, gj);
+                gi *= g, gj /= g;} while (g != 1);
+            m[i] *= gi, m[j] *= gj;
+            b[i] %= m[i], b[j] %= m[j];}}
+    for (ll i = 0; i < (ll)b.size(); ++i) (res *= m[i]) %= MOD;
+    return res;}
+
+inline ll mod(ll a, ll m) {
+    ll res = a % m;
+    if (res < 0) res += m;
+    return res;}
+ll extGCD(ll a, ll b, ll &p, ll &q) {
+    if (b == 0) { p = 1; q = 0; return a; }
+    ll d = extGCD(b, a%b, q, p);
+    q -= a/b * p;
+    return d;}
+ll modinv(ll a, ll m) {
+    ll x, y;extGCD(a, m, x, y);
+    return mod(x, m);}
+ll Garner(vector<ll> b, vector<ll> m, ll MOD) {
+    m.push_back(MOD); // banpei
+    vector<ll> coeffs((ll)m.size(), 1);
+    vector<ll> constants((ll)m.size(), 0);
+    for (ll k = 0; k < (ll)b.size(); ++k) {
+      ll t = mod((b[k] - constants[k]) * modinv(coeffs[k], m[k]), m[k]);
+        for (ll i = k+1; i < (ll)m.size(); ++i) {
+            (constants[i] += t * coeffs[i]) %= m[i];
+            (coeffs[i] *= m[k]) %= m[i];}}
+    return constants.back();}
+
+int main() {
+    ll N; cin >> N;
+    vector<ll> b(N), m(N);
+    bool exist_non_zero = false;
+   rep(i,N) {cin >> b[i] >> m[i];
+        if (b[i]) exist_non_zero = true;}
+    ll lcm = PreGarner(b, m, MOD);
+    if (!exist_non_zero) cout << lcm << endl;
+    else if (lcm == -1) cout << -1 << endl;
+    else cout << Garner(b, m, MOD) << endl;
+}
