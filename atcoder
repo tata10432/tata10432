@@ -1,0 +1,112 @@
+//atcoder で　使うときに　いちいち　調べなくても　すむように　まとめておこう
+
+[string] 
+s.erase(n)             n文字目以降の削除
+s.insert(n,x)          n文字目以降にxの挿入
+s.find(x)
+s.replace(n,m,x)
+s.pop()
+s.
+
+[vector]
+v.erase(v.begin()+i)   i番目の削除
+
+[stack]
+a.push(x)
+p.pop()
+a.top()
+
+[map]
+mp[key].pb(x)
+for(cauto&[key,value]:mp){} 吐き出し
+
+[set]
+a.insert(x)
+a.erase(x)
+a.lb(x)
+
+[queue]
+a.push(x)
+a.pop()             先頭の削除
+a.front()　　　　　　先頭にアクセス
+
+[priority_queue](PQ)
+a.pop()
+a.top()
+PQ<ll,vec,greater<ll>> min順に取り出しになる
+a.push(x)
+
+[deque] 
+a.pb(x)
+a.push_front(x)
+a.pop_back()
+a.pop_front()
+a.front()        先頭アクセス
+a.back()　　　  　末尾アクセス
+
+[pair]
+make_pair(a,b)   pair<ll,ll> p[n]とかして　p[0]=make_pair(a,b);とかできるってだけ？
+sort(all(v),[](cauto& a,cauto& b){return a.second<b.second;}); secondをみたsort
+
+
+[unordered_map]　取り出す順番が不明なmap　何かが早い
+[unordered_set]　
+
+[ACL]
+[dsu]unionfindと同じもの dsu d(n) n頂点0辺のグラフを張る
+d.merge(a,b) 辺(a,b)を足す
+d.same(a,b)  a,bが連結かどうか
+d.leader(a)  代表元を表示
+d.size(a)    連結成分のサイズ
+vector<vec> d.groups() 連結成分でグラフを分ける
+
+[fenwick_tree] fenwick_tree<T> fw(ll n)
+fw.add(p,x)          a[p]+x            O(log N)
+fw.sum(l,r)          Σ[l,r-1]a_i       O(log N)
+
+[segtree] segtree<S,op,e> seg(n)    (seg(vec a)とかでもいいらしい)
+seg.set(p,x)           a[p]にxの代入
+seg.get(p)             a[p]にアクセス
+seg.prod(l,r)          op(a[l]...a[r-1])を返す　(l==rのときはe()を返すらしい)
+seg.all_prod()
+seg.max_right<f>(l)    op(a[l]...a[r-1])=trueなる最大のrを返す
+             <F>(l,f)
+seg.min_left<f>(r)     op(a[l]...a[r-1])=trueなる最小のrを返す
+            <F>(r,f)
+
+書き方　ll op(ll a,ll b){return 処理;}
+       ll e(){}return -1;}
+       struct F{ll _V;F(int V):_V(V){}bool operator()(ll x){return x<_V;}}; 　　使い方よくわかんない
+
+[lazy_segtree] lazy_segtree<S,op,e,F,mapping,composition,id> seg(n);
+seg.apply(p,f)       a[i]=f(a[p])
+seg.apply(l,r,f)     l...r-1でその処理
+
+
+
+
+[convolution]　畳み込み
+vec convolution<mod>(a,b) 
+
+
+
+
+
+
+
+[bit全探索]
+rep(bit,(1<<n)){
+vec S;
+rep(i,n){if(bit&(1<<i)){s.pb(i);}}
+以下略
+}
+
+
+
+
+
+
+
+
+
+
