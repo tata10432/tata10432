@@ -1,0 +1,32 @@
+//経路復元用のdijkstra
+//ABC252E参照
+struct E{ll to,co,idx;};
+vec dijkstra(ll s,vector<vector<E>>&G){
+vec dist(G.size(),1LL<<60);
+vec idx(G.size());//復元用の物
+dist[s]=0;
+PQD q;
+q.emplace(0,s);
+while(!q.empty()){
+auto [d,v]=q.top();q.pop();
+if(dist[v]!=d)continue;
+for(auto[vv,c,i]:G[v]){
+if(dist[vv]>dist[v]+c){
+dist[vv]=dist[v]+c;
+q.emplace(dist[vv],vv);
+idx[vv]=i;
+}}}
+return idx;}
+
+int main(){
+ll n,m;cin>>n>>m;
+vector<vector<E>> G(n);
+rep(i,m){
+ll a,b,c;cin>>a>>b>>c;a--;b--;
+G[a].pbt(b,c,i);
+G[b].pbt(a,c,i);
+}
+vec idx=dijkstra(0,G);
+rrep(i,n){cout<<idx[i]+1<<" ";}
+cout<<endl;return 0;
+}
