@@ -6,10 +6,15 @@ s.insert(n,x)          n文字目以降にxの挿入
 s.find(x)
 s.replace(n,m,x)
 s.pop()
-s.
+[suffix_array]
+[lcp_array]
+[z_algorithm]
+
 
 [vector]
 v.erase(v.begin()+i)   i番目の削除
+v.pop_back()
+replace(all(s),'a','A')
 
 [stack]
 a.push(x)
@@ -18,12 +23,23 @@ a.top()
 
 [map]
 mp[key].pb(x)
-for(cauto&[key,value]:mp){} 吐き出し
+for(const auto &[key,value]:mp){} 吐き出し
+mp.find(x)
+mp.begin()->fi
+mp.begin()->se
+mp.rbegin()->fi
+mp.rbegin()->se
+
+[unordered_map]
 
 [set]
 a.insert(x)
 a.erase(x)
 a.lb(x)
+a.ub(x)
+a.end()
+
+[unordered_set]
 
 [queue]
 a.push(x)
@@ -49,9 +65,6 @@ make_pair(a,b)   pair<ll,ll> p[n]とかして　p[0]=make_pair(a,b);とかでき
 sort(all(v),[](cauto& a,cauto& b){return a.second<b.second;}); secondをみたsort
 
 
-[unordered_map]　取り出す順番が不明なmap　何かが早い
-[unordered_set]　
-
 [ACL]
 [dsu]unionfindと同じもの dsu d(n) n頂点0辺のグラフを張る
 d.merge(a,b) 辺(a,b)を足す
@@ -64,34 +77,9 @@ vector<vec> d.groups() 連結成分でグラフを分ける
 fw.add(p,x)          a[p]+x            O(log N)
 fw.sum(l,r)          Σ[l,r-1]a_i       O(log N)
 
-[segtree] segtree<S,op,e> seg(n)    (seg(vec a)とかでもいいらしい)
-seg.set(p,x)           a[p]にxの代入
-seg.get(p)             a[p]にアクセス
-seg.prod(l,r)          op(a[l]...a[r-1])を返す　(l==rのときはe()を返すらしい)
-seg.all_prod()
-seg.max_right<f>(l)    op(a[l]...a[r-1])=trueなる最大のrを返す
-             <F>(l,f)
-seg.min_left<f>(r)     op(a[l]...a[r-1])=trueなる最小のrを返す
-            <F>(r,f)
-
-書き方　ll op(ll a,ll b){return 処理;}
-       ll e(){}return -1;}
-       struct F{ll _V;F(int V):_V(V){}bool operator()(ll x){return x<_V;}}; 　　使い方よくわかんない
-
-[lazy_segtree] lazy_segtree<S,op,e,F,mapping,composition,id> seg(n);
-seg.apply(p,f)       a[i]=f(a[p])
-seg.apply(l,r,f)     l...r-1でその処理
-
-
-
 
 [convolution]　畳み込み
 vec convolution<mod>(a,b) 
-
-
-
-
-
 
 
 [bit全探索]
@@ -100,6 +88,13 @@ vec S;
 rep(i,n){if(bit&(1<<i)){s.pb(i);}}
 以下略
 }
+
+
+[FPS]
+fps f(n)
+f[i]=x
+f=f.log()
+f=f.exp()
 
 
 
