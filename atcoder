@@ -38,6 +38,8 @@ a.erase(x)
 a.lb(x)
 a.ub(x)
 a.end()
+*a.rbegin()
+*a.begin()
 
 [unordered_set]
 
