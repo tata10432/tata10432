@@ -61,6 +61,7 @@ a.pop_back()
 a.pop_front()
 a.front()        先頭アクセス
 a.back()　　　  　末尾アクセス
+a[x]
 
 [pair]
 make_pair(a,b)   pair<ll,ll> p[n]とかして　p[0]=make_pair(a,b);とかできるってだけ？
