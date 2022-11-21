@@ -113,6 +113,55 @@ cout<<res<<endl;
 
 
 
+[復元込みのdijkstra]
+ll n,m;
+vector<vector<P>> g(n);
+vec dist(n);
+vec Prev(n);
+void dijkstra(ll s){
+PQD q;
+dist.resize(n,INF);
+dist[s]=0;
+q.push({0,s});
+while(!q.empty()){
+auto [u,v]=q.top();
+q.pop();
+if(dist[v]<u){continue;}
+for(auto [e,f]:g[v]){
+if(chmin(dist[e],dist[v]+f)){
+Prev[e]=v;
+q.push({dist[e],e});}
+}
+}
+}
+vec get_path(const vec &Prev, ll t) {//goal point の打ち込み
+vec path;
+for (ll cur = t; cur != -1; cur = Prev[cur])path.pb(cur);
+reverse(all(path));
+return path;
+}
+int main(){
+ll s,t;
+cin>>n>>m>>s>>t;
+dist.resize(n,INF);
+g.resize(n);
+Prev.resize(n,-1);
+rep(i,m){
+ll a,b,c;
+cin>>a>>b>>c;
+g[a].pb({b,c});
+}
+dijkstra(s);
+ll key=t;
+vec res=get_path(Prev,t);
+if(dist[t]==INF){cout<<-1<<endl;return 0;}
+cout<<dist[t]<<" "<<res.size()-1<<endl;
+rep(i,res.size()-1){
+cout<<res[i]<<" "<<res[i+1]<<endl;
+}
+}
+
+
 
 
 
