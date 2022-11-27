@@ -162,6 +162,11 @@ cout<<res[i]<<" "<<res[i+1]<<endl;
 }
 
 
+gcdのseg木は
+S op(S a, S b){ return gcd(a, b); }
+S e(){ return 0; }
+
+とかすればいい
 
 
 
