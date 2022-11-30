@@ -1,0 +1,18 @@
+
+ll n,m;
+cin>>n>>m;
+vec c(m),l(m),r(m);
+rep(i,m)cin>>c[i]>>l[i]>>r[i];
+vector<tuple<ll,ll,ll>> kruskal;
+rep(i,m)kruskal.pb({c[i],l[i]-1,r[i]});
+sort(all(kruskal));
+ll ans=0;
+dsu uf(n+1);
+rep(i,m){
+auto [w,u,v]=kruskal[i];
+if(!uf.same(u,v)){
+uf.merge(u,v);
+ans+=w;
+}
+}
+cout<<(uf.size(0)==n?ans:-1)<<endl;
